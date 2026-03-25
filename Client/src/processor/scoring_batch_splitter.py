@@ -28,9 +28,15 @@ class ScoringBatchSplitter:
 
         self.max_concurrent_splits = 2  # 最大并发拆分任务数
         # 强制指定输出根目录（绝对路径，确保脚本输出到这里）
-        self.output_root_dir = r"C:\Users\diva\Desktop\competition-diva-ai-main\Client\outputs\temp_scoring_splits"
-        self.temp_download_dir = "outputs/temp_scoring_downloads"
-        self.splitting_script_path = r"D:\competition\audio_process_pth.py"  # 拆分脚本绝对路径
+        #self.output_root_dir = r"C:\Users\diva\Desktop\competition-diva-ai-main\Client\outputs\temp_scoring_splits"
+        self.output_root_dir = "Client/src/outputs/temp_scoring_splits"
+
+        #self.temp_download_dir = "outputs/temp_scoring_downloads"
+        self.temp_download_dir = "Client/src/outputs/temp_scoring_downloads"
+        
+        #self.splitting_script_path = r"D:\competition\audio_process_pth.py"  # 拆分脚本绝对路径
+        self.splitting_script_path = "/home/zx/codexProject/vocal_analysis/Client/scripts/audio_process_pth.py"
+
         # 可选脚本路径（根据实际情况切换）：D:\competition\audio_process_onnx.py
         self.segment_duration = 10  # 默认10秒分段
 
@@ -44,7 +50,8 @@ class ScoringBatchSplitter:
             6: 'bass'
         }
 
-        self.venv_python = r"D:\xuchengwei\anaconda\envs\competition_py310\python.exe"
+        #self.venv_python = r"D:\xuchengwei\anaconda\envs\competition_py310\python.exe"
+        self.venv_python = "/home/zx/miniconda3/envs/cbg/bin/python3"
 
         # 确保输出目录和下载目录存在
         Path(self.output_root_dir).mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,5 @@
+2026-03-25 23:13:16 - task_manager - INFO - 任务管理器初始化完成，最大并发任务数: 3
+2026-03-25 23:13:16 - task_manager - INFO - 开始处理任务: 64
+2026-03-25 23:13:16 - task_manager - INFO - 下载音频文件: https://oss.diva-ai.cn/competition/model-scoring/169-1772787889179-679435166.wav
+2026-03-25 23:13:18 - task_manager - ERROR - 任务 64 模型评分失败
+2026-03-25 23:19:16 - task_manager - INFO - 任务管理器初始化完成，最大并发任务数: 3
