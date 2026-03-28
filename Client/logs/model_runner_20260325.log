@@ -1,0 +1,13 @@
+2026-03-25 23:13:16 - model_runner - INFO - 模型执行器初始化完成，脚本路径: /home/zx/codexProject/vocal_analysis/Client/scripts/inference_score_file.py
+2026-03-25 23:13:17 - model_runner - INFO - 开始执行模型评分: 任务=64, 文件=/home/zx/codexProject/vocal_analysis/Client/outputs/temp_audio/task_64_169-1772787889179-679435166.wav
+2026-03-25 23:13:17 - model_runner - INFO - ====================
+2026-03-25 23:13:17 - model_runner - INFO - 开始执行推理: 任务=64, 音频文件=/home/zx/codexProject/vocal_analysis/Client/outputs/temp_audio/task_64_169-1772787889179-679435166.wav, 声部=sopran
+2026-03-25 23:13:17 - model_runner - INFO - 脚本路径: {script_path}
+2026-03-25 23:13:17 - model_runner - INFO - 执行命令: ['/home/zx/miniconda3/envs/cbg/bin/python', '/home/zx/codexProject/vocal_analysis/Client/scripts/inference_score_file.py', '--audiofile', '/home/zx/codexProject/vocal_analysis/Client/outputs/temp_audio/task_64_169-1772787889179-679435166.wav', '--mfccdir', '/home/zx/codexProject/vocal_analysis/Client/outputs/task_64/mfcc', '--outputdir', '/home/zx/codexProject/vocal_analysis/Client/outputs/task_64', '--part', 'sopran']
+2026-03-25 23:13:17 - model_runner - INFO - ====================
+2026-03-25 23:13:18 - model_runner - ERROR - [子进程] Traceback (most recent call last):
+2026-03-25 23:13:18 - model_runner - ERROR - [子进程]   File "/home/zx/codexProject/vocal_analysis/Client/scripts/inference_score_file.py", line 7, in <module>
+2026-03-25 23:13:18 - model_runner - ERROR - [子进程]     from CAM_S import CAMPPlus  # 请确保正确导入此模块
+2026-03-25 23:13:18 - model_runner - ERROR - [子进程] ModuleNotFoundError: No module named 'CAM_S'
+2026-03-25 23:13:18 - model_runner - ERROR - 推理失败: 任务=64, 返回码=1
+2026-03-25 23:19:16 - model_runner - INFO - 模型执行器初始化完成，脚本路径: /home/zx/codexProject/vocal_analysis/Client/scripts/inference_score_file.py

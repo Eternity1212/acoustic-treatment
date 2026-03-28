@@ -18,6 +18,7 @@ from model_dpo import build_model
 from trainer_dpo import (
     create_run_dir,
     load_model_weights,
+    resolve_policy_checkpoint,
     run_epoch,
     save_state_dict,
     set_random_seed,
@@ -29,6 +30,7 @@ OVERRIDE_KEYS = [
     "data_dir",
     "sft_checkpoint",
     "reference_checkpoint",
+    "policy_model_dir",
     "output_dir",
     "device",
     "num_epochs",
@@ -51,6 +53,12 @@ def parse_args():
         type=str,
         default=None,
         help="覆盖 reference checkpoint 路径。留空时回退为 SFT checkpoint。",
+    )
+    parser.add_argument(
+        "--policy-model-dir",
+        type=str,
+        default=None,
+        help="覆盖固定 policy model 目录。若目录中已有 policy_model.pth，则优先从这里继续训练。",
     )
     parser.add_argument("--output-dir", type=str, default=None, help="覆盖训练输出根目录。")
     parser.add_argument("--device", type=str, default=None, help="覆盖训练设备，例如 cpu 或 cuda。")
@@ -90,6 +98,7 @@ def validate_config(config):
         "data_dir",
         "sft_checkpoint",
         "output_dir",
+        "policy_model_dir",
         "train_batch_size",
         "val_batch_size",
         "num_workers",
@@ -130,6 +139,15 @@ def main():
     logging.info("Resolved config: %s", config)
 
     device = torch.device(config["device"])
+    policy_checkpoint_path = resolve_policy_checkpoint(
+        policy_model_dir=config["policy_model_dir"],
+        fallback_checkpoint=config["sft_checkpoint"],
+    )
+    if policy_checkpoint_path == config["sft_checkpoint"]:
+        logging.info("Policy model init checkpoint: %s (fallback from sft_checkpoint)", policy_checkpoint_path)
+    else:
+        logging.info("Policy model init checkpoint: %s (loaded from policy_model_dir)", policy_checkpoint_path)
+
     train_dataset = PreferenceDataset(
         data_dir=config["data_dir"],
         split="train",
@@ -160,7 +178,7 @@ def main():
 
     policy_model = build_model(config, device)
     reference_model = build_model(config, device)
-    load_model_weights(policy_model, config["sft_checkpoint"], device)
+    load_model_weights(policy_model, policy_checkpoint_path, device)
     load_model_weights(reference_model, config["reference_checkpoint"], device)
     reference_model.requires_grad_(False)
     reference_model.eval()
@@ -229,6 +247,9 @@ def main():
             )
 
     writer.close()
+    persistent_policy_path = os.path.join(config["policy_model_dir"], "policy_model.pth")
+    save_state_dict(policy_model, persistent_policy_path)
+    logging.info("Saved persistent policy model to %s", persistent_policy_path)
     logging.info("Training finished. Best validation preference accuracy: %.4f", best_val_preference_accuracy)
 
 

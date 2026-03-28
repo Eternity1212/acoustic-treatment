@@ -36,8 +36,9 @@ data_dir/
 训练前请先修改 `dpo/config_dpo.json`：
 
 - `data_dir`：偏好数据集根目录
-- `sft_checkpoint`：用于初始化 policy 的 SFT 模型路径
+- `sft_checkpoint`：首次训练或 `policy_model_dir` 为空时，用于初始化 policy 的 SFT 模型路径
 - `reference_checkpoint`：可选的冻结 reference 模型路径，留空时复用 `sft_checkpoint`
+- `policy_model_dir`：固定 policy model 目录。若其中已有 `policy_model.pth`，后续 DPO 训练会优先从这里继续
 - `output_dir`：DPO 训练输出目录根路径
 - 其余训练与模型超参数
 
@@ -70,3 +71,6 @@ CONDA_NO_PLUGINS=true NUMBA_DISABLE_JIT=1 conda run -n cbg python3 dpo/train_dpo
 - `last_model.pth`
 - `train.log`
 - TensorBoard event files
+
+此外，训练结束后当前的 policy model 还会同步保存到
+`policy_model_dir/policy_model.pth`，供下一次 DPO 训练直接继续加载。

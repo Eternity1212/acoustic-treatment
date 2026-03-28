@@ -141,6 +141,15 @@ def load_model_weights(model, checkpoint_path, device):
     model.load_state_dict(cleaned_state_dict)
 
 
+def resolve_policy_checkpoint(policy_model_dir, fallback_checkpoint):
+    """优先返回固定 policy 目录中的 checkpoint，不存在时回退到初始 checkpoint。"""
+
+    policy_checkpoint = os.path.join(policy_model_dir, "policy_model.pth")
+    if os.path.exists(policy_checkpoint):
+        return policy_checkpoint
+    return fallback_checkpoint
+
+
 def save_state_dict(model, output_path):
     """保存当前 policy 模型的 state_dict。"""
 

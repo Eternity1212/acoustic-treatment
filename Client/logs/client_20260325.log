@@ -1,0 +1,5 @@
+2026-03-25 23:13:16 - client - INFO - 📥 开始下载音频文件: https://oss.diva-ai.cn/competition/model-scoring/169-1772787889179-679435166.wav
+2026-03-25 23:13:16 - client - INFO - 📁 保存到: /home/zx/codexProject/vocal_analysis/Client/outputs/temp_audio/task_64_169-1772787889179-679435166.wav
+2026-03-25 23:13:17 - client - INFO - 📊 HTTP响应状态: 200
+2026-03-25 23:13:17 - client - INFO - ✅ 音频文件下载完成: /home/zx/codexProject/vocal_analysis/Client/outputs/temp_audio/task_64_169-1772787889179-679435166.wav
+2026-03-25 23:13:17 - client - INFO - 📊 文件大小: 3534848 bytes

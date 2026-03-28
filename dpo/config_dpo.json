@@ -6,6 +6,8 @@
   "sft_checkpoint": "/home/zx/codexProject/vocal_analysis/best_model/Sopran/best_model.pth",
   "_comment_reference_checkpoint": "字符串或空字符串。可选的冻结 reference checkpoint 路径。留空时会自动复用 sft_checkpoint。",
   "reference_checkpoint": "",
+  "_comment_policy_model_dir": "字符串。固定 policy model 目录。若目录内已有 policy_model.pth，则后续 DPO 训练优先从这里加载；训练结束后也会回写到这里。",
+  "policy_model_dir": "/home/zx/codexProject/vocal_analysis/policy_model",
   "_comment_output_dir": "字符串。DPO 训练输出根目录。程序会在该目录下按时间戳创建日志和模型保存目录。",
   "output_dir": "dpo/runs",
   "_comment_train_batch_size": "整数。训练集 dataloader 的 batch size。只有在显存或内存足够时再增大。",
