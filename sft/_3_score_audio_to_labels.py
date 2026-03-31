@@ -16,11 +16,20 @@ from torch.utils.data import DataLoader, Dataset
 from _2_CAM_S import CAMPPlus
 
 
-DATASET_ROOT = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran"
-MFCC_DIR = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/MFCC_Output"
-LABEL_TEMPLATE_DIR = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/Label"
-OUTPUT_LABEL_DIR = "/home/zx/Valentin_workplace/DPO_data/3_28_Sopran/Rejected"
-PRETRAINED_WEIGHTS = "/home/zx/Valentin_workplace/最佳模型成人/5e-5+16+1e-3/Sopran/best_model.pth"
+#DATASET_ROOT = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran"
+#MFCC_DIR = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/MFCC_Output"
+#LABEL_TEMPLATE_DIR = "/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/Label"
+#OUTPUT_LABEL_DIR = "/home/zx/Valentin_workplace/DPO_data/3_28_Sopran/Rejected"
+#PRETRAINED_WEIGHTS = "/home/zx/Valentin_workplace/最佳模型成人/5e-5+16+1e-3/Sopran/best_model.pth"
+
+
+DATASET_ROOT = "/home/zx/Valentin_workplace/DPO_data/Mezzo"
+MFCC_DIR = "/home/zx/Valentin_workplace/DPO_data/Mezzo/train/MFCC_Output/"
+LABEL_TEMPLATE_DIR = "/home/zx/Valentin_workplace/DPO_data/Mezzo/train/Chosen/"
+OUTPUT_LABEL_DIR = "/home/zx//Valentin_workplace/DPO_data/Mezzo/train/Rejected/"
+PRETRAINED_WEIGHTS = "/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo/2026-03-31_11-21-48/best_model.pth"
+
+
 
 VAL_BATCH_SIZE = 16
 NUM_WORKERS = 4
@@ -40,10 +49,17 @@ MODEL_TECH_NAMES = [
 ]
 
 LABEL_ALIAS = {
-    "Passagio": "Unify",
-    "Passaggio": "Unify",
-    "Unify": "Unify",
+    "chset": "chest",
+    "passagio": "unify",
+    "passaggio": "unify",
+    "unify": "unify",
 }
+
+
+def normalize_label_name(label: object) -> str:
+    """Normalize a label name for case-insensitive matching."""
+
+    return str(label).strip().casefold()
 
 
 class CustomDataset(Dataset):
@@ -97,14 +113,17 @@ def load_label_template(label_dir: str) -> pd.DataFrame:
 def build_label_indices(template_df: pd.DataFrame) -> List[int]:
     """Map template label order to model output indices."""
 
+    tech_name_to_index = {
+        normalize_label_name(tech_name): idx for idx, tech_name in enumerate(MODEL_TECH_NAMES)
+    }
     label_raws = template_df.iloc[:10, 0].tolist()
     indices: List[int] = []
     for raw_label in label_raws:
-        label_key = str(raw_label).strip()
-        label_key = LABEL_ALIAS.get(label_key, label_key)
-        if label_key not in MODEL_TECH_NAMES:
+        label_key = normalize_label_name(raw_label)
+        canonical_label = LABEL_ALIAS.get(label_key, label_key)
+        if canonical_label not in tech_name_to_index:
             raise ValueError(f"Unexpected label name '{raw_label}' not in model tech list.")
-        indices.append(MODEL_TECH_NAMES.index(label_key))
+        indices.append(tech_name_to_index[canonical_label])
     return indices
 
 

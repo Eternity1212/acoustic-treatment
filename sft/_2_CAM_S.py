@@ -279,13 +279,21 @@ def validate(net, val_loader, criterion, device):
     return np.mean(val_loss), correct / total
 
 
-def train_model(net, train_loader, val_loader, num_epochs, optimizer, criterion, lr_scheduler, device, log_dir, pretrained_weights=None):
+def train_model(net, train_loader, val_loader, num_epochs, optimizer, criterion, lr_scheduler, device, log_dir,
+                pretrained_weights=None, early_stop_metric="val_loss", early_stop_patience=10,
+                early_stop_min_delta=1e-4, early_stop_restore_best=True):
     if pretrained_weights and os.path.exists(pretrained_weights):
         net.load_state_dict(torch.load(pretrained_weights))
         logging.info(f"Loaded pretrained weights from {pretrained_weights}")
 
     writer = SummaryWriter(log_dir=log_dir)
-    best_val_acc = 0.0
+    best_metric = None
+    epochs_no_improve = 0
+    best_model_path = os.path.join(log_dir, 'best_model.pth')
+
+    if early_stop_metric not in ("val_loss", "val_acc"):
+        raise ValueError(f"Unsupported early_stop_metric: {early_stop_metric}")
+    lower_is_better = early_stop_metric == "val_loss"
 
     for epoch in range(num_epochs):
         train_loss, train_acc = train_epoch(net, train_loader, criterion, optimizer, device, lr_scheduler)
@@ -298,23 +306,40 @@ def train_model(net, train_loader, val_loader, num_epochs, optimizer, criterion,
         writer.add_scalar('Val_Loss', val_loss, epoch)
         writer.add_scalar('Val_Accuracy', val_acc, epoch)
 
+        current_metric = val_loss if early_stop_metric == "val_loss" else val_acc
+        if best_metric is None:
+            is_improved = True
+        elif lower_is_better:
+            is_improved = current_metric < (best_metric - early_stop_min_delta)
+        else:
+            is_improved = current_metric > (best_metric + early_stop_min_delta)
+
         # 保存最佳模型
-        if val_acc > best_val_acc:
-            best_val_acc = val_acc
-
-            model_path = os.path.join(log_dir, 'best_model.pth')
-
+        if is_improved:
+            best_metric = current_metric
+            epochs_no_improve = 0
             try:
-                # 确保目录存在
-                os.makedirs(os.path.dirname(model_path), exist_ok=True)
-                torch.save(net.state_dict(), model_path)
-                logging.warning(f"Saved best model with validation accuracy: {val_acc:.4f}")
+                os.makedirs(os.path.dirname(best_model_path), exist_ok=True)
+                torch.save(net.state_dict(), best_model_path)
+                logging.warning(f"Saved best model with {early_stop_metric}: {current_metric:.6f}")
             except Exception as e:
                 logging.error(f"Failed to save best model: {e}")
                 break
+        else:
+            epochs_no_improve += 1
+
+        if early_stop_patience is not None and early_stop_patience > 0:
+            if epochs_no_improve >= early_stop_patience:
+                logging.warning(
+                    f"Early stopping triggered at epoch {epoch + 1} with best {early_stop_metric}: {best_metric:.6f}"
+                )
+                if early_stop_restore_best and os.path.exists(best_model_path):
+                    net.load_state_dict(torch.load(best_model_path))
+                    logging.info("Restored best model weights after early stopping.")
+                break
 
     writer.close()
-    return best_val_acc
+    return best_metric
 
 def get_nonlinear(config_str, channels):
     nonlinear = nn.Sequential()
@@ -552,7 +577,8 @@ class CAMPPlus(nn.Module):
 
 if __name__ == '__main__':
     #data_dir = r"/home/zx/Valentin_workplace/Sopran+Mezzo"
-    data_dir ="/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/" 
+    #data_dir ="/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/" 
+    data_dir ="/home/zx/Valentin_workplace/DPO_data/retrain_mezzo/"
     train_batch_size = 16
     val_batch_size = 16
     num_workers = 4
@@ -560,6 +586,9 @@ if __name__ == '__main__':
     num_epochs = 150
     learning_rate = 1e-5
     pretrained_weights = None
+    early_stop_metric = "val_loss"
+    early_stop_patience = 10
+    early_stop_min_delta = 1e-4
 
 #r"home/zx/Valentin_workplace/最佳模型成人/5e-5+16+1e-3/Sopran/best_model.pth"
 
@@ -584,9 +613,11 @@ if __name__ == '__main__':
 
     current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     #log_dir = os.path.join("/home/zx/AST1/best_models_for_grid_Sopran+Mezzo/1e-5+16+1e-4", current_time)
-    log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models", current_time)
+    #log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models", current_time)
+    log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo", current_time)
     os.makedirs(log_dir, exist_ok=True)
 
     train_model(model, train_loader, val_loader, num_epochs, optimizer, criterion, lr_scheduler, device, log_dir,
-                pretrained_weights)
+                pretrained_weights, early_stop_metric, early_stop_patience, early_stop_min_delta,
+                early_stop_restore_best=True)
     train_dataset = CustomDataset(data_dir, train=True)

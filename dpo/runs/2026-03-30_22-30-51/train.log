@@ -1,0 +1,68 @@
+2026-03-30 22:30:51,783 | INFO | Run directory: dpo/runs/2026-03-30_22-30-51
+2026-03-30 22:30:51,783 | INFO | Resolved config: {'data_dir': '/home/zx/Valentin_workplace/DPO_data/Sopran/train', 'sft_checkpoint': '/home/zx/codexProject/vocal_analysis/best_model/Sopran/best_model.pth', 'reference_checkpoint': '/home/zx/codexProject/vocal_analysis/best_model/Sopran/best_model.pth', 'policy_model_dir': '/home/zx/codexProject/vocal_analysis/policy_model', 'output_dir': 'dpo/runs', 'train_batch_size': 16, 'val_batch_size': 16, 'num_workers': 0, 'num_epochs': 50, 'learning_rate': 1e-05, 'weight_decay': 0.0001, 'beta': 0.1, 'seed': 1314, 'device': 'cpu', 'split_ratio': 0.8, 'num_classes': 50, 'input_size': 1, 'embd_dim': 2560, 'growth_rate': 64, 'bn_size': 4, 'init_channels': 128, 'config_str': 'batchnorm-relu'}
+2026-03-30 22:30:51,783 | INFO | Policy model init checkpoint: /home/zx/codexProject/vocal_analysis/best_model/Sopran/best_model.pth (fallback from sft_checkpoint)
+2026-03-30 22:30:51,783 | INFO | Found 136 aligned preference samples.
+2026-03-30 22:30:51,783 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-03-30 22:30:51,783 | INFO | Prepared 108 train samples.
+2026-03-30 22:30:51,784 | INFO | Found 136 aligned preference samples.
+2026-03-30 22:30:51,784 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-03-30 22:30:51,784 | INFO | Prepared 28 val samples.
+2026-03-30 22:31:02,835 | INFO | Epoch 1/50 | lr=0.00000999 | train_loss=0.5265 | train_pref_acc=0.7113 | val_loss=0.6933 | val_pref_acc=0.5417
+2026-03-30 22:31:02,846 | INFO | Saved new best model with validation preference accuracy 0.5417
+2026-03-30 22:31:13,529 | INFO | Epoch 2/50 | lr=0.00000996 | train_loss=0.4077 | train_pref_acc=0.8452 | val_loss=0.4870 | val_pref_acc=0.6979
+2026-03-30 22:31:13,543 | INFO | Saved new best model with validation preference accuracy 0.6979
+2026-03-30 22:31:24,073 | INFO | Epoch 3/50 | lr=0.00000991 | train_loss=0.3159 | train_pref_acc=0.9018 | val_loss=0.3606 | val_pref_acc=0.8021
+2026-03-30 22:31:24,088 | INFO | Saved new best model with validation preference accuracy 0.8021
+2026-03-30 22:31:34,299 | INFO | Epoch 4/50 | lr=0.00000984 | train_loss=0.2915 | train_pref_acc=0.8929 | val_loss=0.2958 | val_pref_acc=0.8021
+2026-03-30 22:31:44,518 | INFO | Epoch 5/50 | lr=0.00000976 | train_loss=0.2662 | train_pref_acc=0.9107 | val_loss=0.2763 | val_pref_acc=0.8021
+2026-03-30 22:31:54,856 | INFO | Epoch 6/50 | lr=0.00000965 | train_loss=0.2205 | train_pref_acc=0.9256 | val_loss=0.2637 | val_pref_acc=0.8333
+2026-03-30 22:31:54,867 | INFO | Saved new best model with validation preference accuracy 0.8333
+2026-03-30 22:32:05,143 | INFO | Epoch 7/50 | lr=0.00000953 | train_loss=0.2071 | train_pref_acc=0.9524 | val_loss=0.2477 | val_pref_acc=0.8646
+2026-03-30 22:32:05,167 | INFO | Saved new best model with validation preference accuracy 0.8646
+2026-03-30 22:32:15,513 | INFO | Epoch 8/50 | lr=0.00000939 | train_loss=0.2186 | train_pref_acc=0.9286 | val_loss=0.2357 | val_pref_acc=0.8958
+2026-03-30 22:32:15,529 | INFO | Saved new best model with validation preference accuracy 0.8958
+2026-03-30 22:32:25,743 | INFO | Epoch 9/50 | lr=0.00000923 | train_loss=0.1922 | train_pref_acc=0.9345 | val_loss=0.2313 | val_pref_acc=0.8958
+2026-03-30 22:32:35,724 | INFO | Epoch 10/50 | lr=0.00000905 | train_loss=0.1985 | train_pref_acc=0.9226 | val_loss=0.2235 | val_pref_acc=0.8958
+2026-03-30 22:32:45,705 | INFO | Epoch 11/50 | lr=0.00000886 | train_loss=0.1714 | train_pref_acc=0.9494 | val_loss=0.2212 | val_pref_acc=0.8958
+2026-03-30 22:32:55,576 | INFO | Epoch 12/50 | lr=0.00000866 | train_loss=0.1683 | train_pref_acc=0.9524 | val_loss=0.2163 | val_pref_acc=0.8958
+2026-03-30 22:33:05,981 | INFO | Epoch 13/50 | lr=0.00000844 | train_loss=0.1653 | train_pref_acc=0.9405 | val_loss=0.2170 | val_pref_acc=0.8958
+2026-03-30 22:33:16,677 | INFO | Epoch 14/50 | lr=0.00000821 | train_loss=0.1774 | train_pref_acc=0.9345 | val_loss=0.2143 | val_pref_acc=0.8958
+2026-03-30 22:33:26,811 | INFO | Epoch 15/50 | lr=0.00000796 | train_loss=0.1517 | train_pref_acc=0.9613 | val_loss=0.2094 | val_pref_acc=0.8958
+2026-03-30 22:33:37,029 | INFO | Epoch 16/50 | lr=0.00000770 | train_loss=0.1386 | train_pref_acc=0.9643 | val_loss=0.2050 | val_pref_acc=0.8958
+2026-03-30 22:33:47,304 | INFO | Epoch 17/50 | lr=0.00000743 | train_loss=0.1462 | train_pref_acc=0.9732 | val_loss=0.2032 | val_pref_acc=0.9271
+2026-03-30 22:33:47,319 | INFO | Saved new best model with validation preference accuracy 0.9271
+2026-03-30 22:33:57,586 | INFO | Epoch 18/50 | lr=0.00000716 | train_loss=0.1390 | train_pref_acc=0.9643 | val_loss=0.2009 | val_pref_acc=0.8958
+2026-03-30 22:34:07,725 | INFO | Epoch 19/50 | lr=0.00000687 | train_loss=0.1345 | train_pref_acc=0.9613 | val_loss=0.1993 | val_pref_acc=0.9271
+2026-03-30 22:34:17,827 | INFO | Epoch 20/50 | lr=0.00000658 | train_loss=0.1256 | train_pref_acc=0.9702 | val_loss=0.1960 | val_pref_acc=0.9271
+2026-03-30 22:34:28,206 | INFO | Epoch 21/50 | lr=0.00000628 | train_loss=0.1344 | train_pref_acc=0.9613 | val_loss=0.1947 | val_pref_acc=0.9271
+2026-03-30 22:34:38,399 | INFO | Epoch 22/50 | lr=0.00000598 | train_loss=0.1222 | train_pref_acc=0.9643 | val_loss=0.1968 | val_pref_acc=0.9271
+2026-03-30 22:34:48,732 | INFO | Epoch 23/50 | lr=0.00000567 | train_loss=0.1250 | train_pref_acc=0.9554 | val_loss=0.1974 | val_pref_acc=0.9271
+2026-03-30 22:34:58,943 | INFO | Epoch 24/50 | lr=0.00000536 | train_loss=0.1187 | train_pref_acc=0.9643 | val_loss=0.1955 | val_pref_acc=0.9271
+2026-03-30 22:35:09,102 | INFO | Epoch 25/50 | lr=0.00000505 | train_loss=0.1175 | train_pref_acc=0.9732 | val_loss=0.1939 | val_pref_acc=0.9271
+2026-03-30 22:35:19,380 | INFO | Epoch 26/50 | lr=0.00000474 | train_loss=0.1132 | train_pref_acc=0.9643 | val_loss=0.1933 | val_pref_acc=0.9271
+2026-03-30 22:35:29,613 | INFO | Epoch 27/50 | lr=0.00000443 | train_loss=0.1251 | train_pref_acc=0.9732 | val_loss=0.1926 | val_pref_acc=0.9271
+2026-03-30 22:35:39,822 | INFO | Epoch 28/50 | lr=0.00000412 | train_loss=0.1144 | train_pref_acc=0.9673 | val_loss=0.1918 | val_pref_acc=0.9271
+2026-03-30 22:35:49,978 | INFO | Epoch 29/50 | lr=0.00000382 | train_loss=0.1118 | train_pref_acc=0.9702 | val_loss=0.1917 | val_pref_acc=0.9271
+2026-03-30 22:36:00,195 | INFO | Epoch 30/50 | lr=0.00000352 | train_loss=0.1160 | train_pref_acc=0.9702 | val_loss=0.1901 | val_pref_acc=0.9271
+2026-03-30 22:36:10,461 | INFO | Epoch 31/50 | lr=0.00000323 | train_loss=0.1091 | train_pref_acc=0.9702 | val_loss=0.1880 | val_pref_acc=0.9271
+2026-03-30 22:36:20,733 | INFO | Epoch 32/50 | lr=0.00000294 | train_loss=0.1069 | train_pref_acc=0.9643 | val_loss=0.1887 | val_pref_acc=0.9271
+2026-03-30 22:36:31,088 | INFO | Epoch 33/50 | lr=0.00000267 | train_loss=0.1143 | train_pref_acc=0.9613 | val_loss=0.1868 | val_pref_acc=0.9271
+2026-03-30 22:36:41,370 | INFO | Epoch 34/50 | lr=0.00000240 | train_loss=0.1020 | train_pref_acc=0.9643 | val_loss=0.1871 | val_pref_acc=0.9271
+2026-03-30 22:36:51,712 | INFO | Epoch 35/50 | lr=0.00000214 | train_loss=0.1074 | train_pref_acc=0.9732 | val_loss=0.1868 | val_pref_acc=0.9271
+2026-03-30 22:37:02,129 | INFO | Epoch 36/50 | lr=0.00000189 | train_loss=0.1129 | train_pref_acc=0.9643 | val_loss=0.1857 | val_pref_acc=0.9271
+2026-03-30 22:37:12,153 | INFO | Epoch 37/50 | lr=0.00000166 | train_loss=0.1124 | train_pref_acc=0.9702 | val_loss=0.1845 | val_pref_acc=0.9271
+2026-03-30 22:37:22,538 | INFO | Epoch 38/50 | lr=0.00000144 | train_loss=0.0936 | train_pref_acc=0.9732 | val_loss=0.1847 | val_pref_acc=0.9271
+2026-03-30 22:37:32,647 | INFO | Epoch 39/50 | lr=0.00000124 | train_loss=0.1107 | train_pref_acc=0.9613 | val_loss=0.1855 | val_pref_acc=0.9271
+2026-03-30 22:37:42,024 | INFO | Epoch 40/50 | lr=0.00000105 | train_loss=0.1079 | train_pref_acc=0.9732 | val_loss=0.1850 | val_pref_acc=0.9271
+2026-03-30 22:37:51,524 | INFO | Epoch 41/50 | lr=0.00000087 | train_loss=0.1053 | train_pref_acc=0.9702 | val_loss=0.1851 | val_pref_acc=0.9271
+2026-03-30 22:38:00,938 | INFO | Epoch 42/50 | lr=0.00000071 | train_loss=0.1093 | train_pref_acc=0.9673 | val_loss=0.1838 | val_pref_acc=0.9271
+2026-03-30 22:38:10,925 | INFO | Epoch 43/50 | lr=0.00000057 | train_loss=0.1019 | train_pref_acc=0.9732 | val_loss=0.1826 | val_pref_acc=0.9271
+2026-03-30 22:38:20,769 | INFO | Epoch 44/50 | lr=0.00000045 | train_loss=0.1000 | train_pref_acc=0.9732 | val_loss=0.1843 | val_pref_acc=0.9271
+2026-03-30 22:38:30,677 | INFO | Epoch 45/50 | lr=0.00000034 | train_loss=0.1085 | train_pref_acc=0.9732 | val_loss=0.1845 | val_pref_acc=0.9271
+2026-03-30 22:38:40,558 | INFO | Epoch 46/50 | lr=0.00000026 | train_loss=0.1098 | train_pref_acc=0.9732 | val_loss=0.1841 | val_pref_acc=0.9271
+2026-03-30 22:38:50,534 | INFO | Epoch 47/50 | lr=0.00000019 | train_loss=0.1073 | train_pref_acc=0.9702 | val_loss=0.1830 | val_pref_acc=0.9271
+2026-03-30 22:39:00,515 | INFO | Epoch 48/50 | lr=0.00000014 | train_loss=0.1095 | train_pref_acc=0.9702 | val_loss=0.1833 | val_pref_acc=0.9271
+2026-03-30 22:39:10,450 | INFO | Epoch 49/50 | lr=0.00000011 | train_loss=0.1063 | train_pref_acc=0.9732 | val_loss=0.1826 | val_pref_acc=0.9271
+2026-03-30 22:39:20,363 | INFO | Epoch 50/50 | lr=0.00000010 | train_loss=0.1066 | train_pref_acc=0.9732 | val_loss=0.1836 | val_pref_acc=0.9271
+2026-03-30 22:39:20,381 | INFO | Saved persistent policy model to /home/zx/codexProject/vocal_analysis/policy_model/policy_model.pth
+2026-03-30 22:39:20,381 | INFO | Training finished. Best validation preference accuracy: 0.9271
