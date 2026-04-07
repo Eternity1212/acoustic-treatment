@@ -1,0 +1,56 @@
+2026-04-06 16:01:50,459 | INFO | Run directory: dpo/runs/Sopran_beta_0_5/2026-04-06_16-01-50
+2026-04-06 16:01:50,459 | INFO | Resolved config: {'data_dir': '/home/zx/Valentin_workplace/DPO_data/Sopran/train', 'sft_checkpoint': '/home/zx/codexProject/vocal_analysis/sft/best_models/Sopran/best_model.pth', 'reference_checkpoint': '/home/zx/codexProject/vocal_analysis/sft/best_models/Sopran/best_model.pth', 'policy_model_dir': '/home/zx/codexProject/vocal_analysis/policy_model/Sopran_beta_0_5/', 'output_dir': 'dpo/runs/Sopran_beta_0_5', 'train_batch_size': 16, 'val_batch_size': 16, 'num_workers': 0, 'num_epochs': 50, 'learning_rate': 1e-05, 'weight_decay': 0.0001, 'beta': 0.5, 'seed': 1314, 'device': 'cpu', 'early_stopping_enabled': True, 'early_stopping_patience': 10, 'early_stopping_min_delta': 0.0001, 'split_ratio': 0.8, 'num_classes': 50, 'input_size': 1, 'embd_dim': 2560, 'growth_rate': 64, 'bn_size': 4, 'init_channels': 128, 'config_str': 'batchnorm-relu'}
+2026-04-06 16:01:50,459 | INFO | Policy model init checkpoint: /home/zx/codexProject/vocal_analysis/sft/best_models/Sopran/best_model.pth (fallback from sft_checkpoint)
+2026-04-06 16:01:50,459 | INFO | Found 136 aligned preference samples.
+2026-04-06 16:01:50,459 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-04-06 16:01:50,459 | INFO | Prepared 108 train samples.
+2026-04-06 16:01:50,460 | INFO | Found 136 aligned preference samples.
+2026-04-06 16:01:50,460 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-04-06 16:01:50,460 | INFO | Prepared 28 val samples.
+2026-04-06 16:02:02,293 | INFO | Epoch 1/50 | lr=0.00000999 | train_loss=0.9902 | train_pref_acc=0.7113 | val_loss=1.7432 | val_pref_acc=0.5833
+2026-04-06 16:02:02,312 | INFO | Saved new best model with validation preference accuracy 0.5833
+2026-04-06 16:02:13,612 | INFO | Epoch 2/50 | lr=0.00000996 | train_loss=0.4922 | train_pref_acc=0.8244 | val_loss=0.9654 | val_pref_acc=0.6979
+2026-04-06 16:02:13,637 | INFO | Saved new best model with validation preference accuracy 0.6979
+2026-04-06 16:02:24,630 | INFO | Epoch 3/50 | lr=0.00000991 | train_loss=0.2468 | train_pref_acc=0.8839 | val_loss=0.5439 | val_pref_acc=0.7708
+2026-04-06 16:02:24,650 | INFO | Saved new best model with validation preference accuracy 0.7708
+2026-04-06 16:02:35,643 | INFO | Epoch 4/50 | lr=0.00000984 | train_loss=0.2375 | train_pref_acc=0.9018 | val_loss=0.3693 | val_pref_acc=0.8021
+2026-04-06 16:02:35,655 | INFO | Saved new best model with validation preference accuracy 0.8021
+2026-04-06 16:02:46,565 | INFO | Epoch 5/50 | lr=0.00000976 | train_loss=0.2191 | train_pref_acc=0.8929 | val_loss=0.3539 | val_pref_acc=0.8021
+2026-04-06 16:02:46,576 | INFO | No validation preference accuracy improvement for 1 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:02:57,336 | INFO | Epoch 6/50 | lr=0.00000965 | train_loss=0.1211 | train_pref_acc=0.9167 | val_loss=0.3637 | val_pref_acc=0.8021
+2026-04-06 16:02:57,349 | INFO | No validation preference accuracy improvement for 2 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:03:08,222 | INFO | Epoch 7/50 | lr=0.00000953 | train_loss=0.0886 | train_pref_acc=0.9524 | val_loss=0.3064 | val_pref_acc=0.8021
+2026-04-06 16:03:08,233 | INFO | No validation preference accuracy improvement for 3 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:03:19,341 | INFO | Epoch 8/50 | lr=0.00000939 | train_loss=0.1667 | train_pref_acc=0.9286 | val_loss=0.2549 | val_pref_acc=0.8333
+2026-04-06 16:03:19,360 | INFO | Saved new best model with validation preference accuracy 0.8333
+2026-04-06 16:03:30,369 | INFO | Epoch 9/50 | lr=0.00000923 | train_loss=0.0935 | train_pref_acc=0.9256 | val_loss=0.2563 | val_pref_acc=0.8333
+2026-04-06 16:03:30,381 | INFO | No validation preference accuracy improvement for 1 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:03:41,410 | INFO | Epoch 10/50 | lr=0.00000905 | train_loss=0.1424 | train_pref_acc=0.9315 | val_loss=0.2483 | val_pref_acc=0.8333
+2026-04-06 16:03:41,422 | INFO | No validation preference accuracy improvement for 2 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:03:52,420 | INFO | Epoch 11/50 | lr=0.00000886 | train_loss=0.0561 | train_pref_acc=0.9732 | val_loss=0.2486 | val_pref_acc=0.8333
+2026-04-06 16:03:52,432 | INFO | No validation preference accuracy improvement for 3 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:04:03,254 | INFO | Epoch 12/50 | lr=0.00000866 | train_loss=0.0745 | train_pref_acc=0.9405 | val_loss=0.2359 | val_pref_acc=0.8646
+2026-04-06 16:04:03,267 | INFO | Saved new best model with validation preference accuracy 0.8646
+2026-04-06 16:04:14,121 | INFO | Epoch 13/50 | lr=0.00000844 | train_loss=0.0743 | train_pref_acc=0.9435 | val_loss=0.2284 | val_pref_acc=0.8646
+2026-04-06 16:04:14,129 | INFO | No validation preference accuracy improvement for 1 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:04:25,226 | INFO | Epoch 14/50 | lr=0.00000821 | train_loss=0.1006 | train_pref_acc=0.9345 | val_loss=0.2227 | val_pref_acc=0.8646
+2026-04-06 16:04:25,234 | INFO | No validation preference accuracy improvement for 2 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:04:36,294 | INFO | Epoch 15/50 | lr=0.00000796 | train_loss=0.0594 | train_pref_acc=0.9524 | val_loss=0.2192 | val_pref_acc=0.8646
+2026-04-06 16:04:36,306 | INFO | No validation preference accuracy improvement for 3 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:04:47,305 | INFO | Epoch 16/50 | lr=0.00000770 | train_loss=0.0502 | train_pref_acc=0.9732 | val_loss=0.2160 | val_pref_acc=0.8646
+2026-04-06 16:04:47,316 | INFO | No validation preference accuracy improvement for 4 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:04:58,369 | INFO | Epoch 17/50 | lr=0.00000743 | train_loss=0.0503 | train_pref_acc=0.9732 | val_loss=0.2161 | val_pref_acc=0.8646
+2026-04-06 16:04:58,376 | INFO | No validation preference accuracy improvement for 5 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:09,421 | INFO | Epoch 18/50 | lr=0.00000716 | train_loss=0.0633 | train_pref_acc=0.9554 | val_loss=0.2185 | val_pref_acc=0.8646
+2026-04-06 16:05:09,429 | INFO | No validation preference accuracy improvement for 6 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:20,477 | INFO | Epoch 19/50 | lr=0.00000687 | train_loss=0.0487 | train_pref_acc=0.9732 | val_loss=0.2130 | val_pref_acc=0.8646
+2026-04-06 16:05:20,484 | INFO | No validation preference accuracy improvement for 7 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:31,273 | INFO | Epoch 20/50 | lr=0.00000658 | train_loss=0.0524 | train_pref_acc=0.9613 | val_loss=0.2094 | val_pref_acc=0.8646
+2026-04-06 16:05:31,281 | INFO | No validation preference accuracy improvement for 8 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:42,335 | INFO | Epoch 21/50 | lr=0.00000628 | train_loss=0.0629 | train_pref_acc=0.9613 | val_loss=0.2074 | val_pref_acc=0.8646
+2026-04-06 16:05:42,348 | INFO | No validation preference accuracy improvement for 9 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:53,350 | INFO | Epoch 22/50 | lr=0.00000598 | train_loss=0.0449 | train_pref_acc=0.9732 | val_loss=0.2110 | val_pref_acc=0.8646
+2026-04-06 16:05:53,357 | INFO | No validation preference accuracy improvement for 10 epoch(s). patience=10, min_delta=0.000100
+2026-04-06 16:05:53,358 | INFO | Early stopping triggered at epoch 22. Best validation preference accuracy: 0.8646
+2026-04-06 16:05:53,365 | INFO | Saved persistent policy model to /home/zx/codexProject/vocal_analysis/policy_model/Sopran_beta_0_5/policy_model.pth
+2026-04-06 16:05:53,366 | INFO | Training finished. Best validation preference accuracy: 0.8646

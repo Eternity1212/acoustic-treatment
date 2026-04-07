@@ -1,0 +1,87 @@
+# DPO 声乐偏好训练的默认配置。
+# 所有关键超参数统一维护在这个 YAML 文件中，命令行只作为少量覆盖层使用。
+
+# 偏好数据集根目录。
+# 该目录下必须包含 MFCC_Output、Chosen 和 Rejected 三个子目录。
+##data_dir: /home/zx/Valentin_workplace/DPO_data/Mezzo/train
+data_dir: /home/zx/Valentin_workplace/DPO_data/Tenor/train
+
+# 用于初始化可训练 policy 模型的 SFT checkpoint 路径。
+sft_checkpoint: /home/zx/codexProject/vocal_analysis/sft/best_models/Tenor/2026-04-06_16-31-27/best_model.pth
+
+# 可选的冻结 reference checkpoint 路径。
+# 留空时会自动复用 sft_checkpoint。
+reference_checkpoint: ""
+
+# 固定 policy model 目录。
+# 若目录内已有 policy_model.pth，则后续 DPO 训练优先从这里加载；
+# 训练结束后也会回写到这里。
+policy_model_dir: /home/zx/codexProject/vocal_analysis/policy_model/Tenor/
+
+# DPO 训练输出根目录。
+# 程序会在该目录下按时间戳创建日志和模型保存目录。
+output_dir: dpo/runs/Tenor
+
+# 训练集 dataloader 的 batch size。
+train_batch_size: 16
+
+# 验证集 dataloader 的 batch size。
+val_batch_size: 16
+
+# dataloader 的 worker 进程数量。
+# 在当前受限环境中建议设为 0，避免多进程权限错误。
+num_workers: 0
+
+# DPO 训练总轮数。
+num_epochs: 50
+
+# policy 模型使用的 Adam 优化器学习率。
+learning_rate: 1.0e-5
+
+# Adam 优化器使用的 weight decay 系数。
+weight_decay: 1.0e-4
+
+# DPO 的 beta 系数，用于控制偏好优化强度。
+beta: 0.1
+
+# 随机种子，用于数据打乱和模型初始化。
+seed: 1314
+
+# 训练设备，通常填写 cpu 或 cuda。
+device: cpu
+
+# 是否启用基于验证集 preference accuracy 的早停。
+early_stopping_enabled: true
+
+# 连续多少个 epoch 未达到最小提升阈值后触发早停。
+early_stopping_patience: 10
+
+# 验证集 preference accuracy 至少提升多少才算真正刷新最佳值。
+early_stopping_min_delta: 1.0e-4
+
+# 用于训练集的样本比例，剩余部分自动作为验证集。
+split_ratio: 0.8
+
+# 输出 logits 的总维度。
+# 当前任务是 10 个评分项、每项 5 类，因此保持为 50。
+num_classes: 50
+
+# 模型输入通道数。
+input_size: 1
+
+# 最终分类层之前的展平 embedding 维度。
+# 该值必须与 checkpoint 对应的模型结构一致。
+embd_dim: 2560
+
+# CAMDenseTDNN block 内部使用的 growth rate。
+growth_rate: 64
+
+# CAMDenseTDNN block 中 bottleneck 的扩展倍率。
+bn_size: 4
+
+# 融合层使用的初始通道宽度。
+init_channels: 128
+
+# 非线性模块配置字符串。
+# 除非你明确要改模型结构，否则保持为 batchnorm-relu。
+config_str: batchnorm-relu

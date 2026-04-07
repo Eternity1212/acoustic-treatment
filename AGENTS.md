@@ -6,7 +6,7 @@
 
 - DPO 代码必须放在 `dpo/` 目录中。为 DPO 流程开发时不要修改 `sft/`。
 - 不要再把 DPO 训练回退成单个巨型脚本。入口文件保持精简，模型、数据和训练逻辑必须拆分到独立文件中。
-- DPO 关键超参数统一维护在 `dpo/config_dpo.json` 中。命令行只作为少量覆盖层使用。
+- DPO 关键超参数统一维护在 `dpo/config_dpo.yaml` 中。命令行只作为少量覆盖层使用。
 - 每个 DPO 源码文件开头都要写清晰的文件头注释或模块 docstring。
 - 保持当前偏好数据格式约定：
   - `MFCC_Output/<sample_id>_MFCC.xlsx`
@@ -22,5 +22,5 @@
 ## 推荐启动命令
 
 ```bash
-CONDA_NO_PLUGINS=true NUMBA_DISABLE_JIT=1 conda run -n cbg python3 dpo/train_dpo.py --config dpo/config_dpo.json
+CONDA_NO_PLUGINS=true NUMBA_DISABLE_JIT=1 conda run -n cbg python3 dpo/train_dpo.py --config dpo/config_dpo.yaml
 ```

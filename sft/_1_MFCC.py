@@ -36,7 +36,7 @@ def extract_mfcc_features(file_path, max_pad_len=128):
 
 # 将所有WAV转化为MFCC表格
 #directory = r"/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran"
-directory = r"/home/zx//Downloads/2026_03_31_10_28"
+directory = r"/home/zx/Valentin_workplace/DPO_data/Baritone"
 Audio_path = os.path.join(directory, "Audio")
 
 files = os.listdir(Audio_path)

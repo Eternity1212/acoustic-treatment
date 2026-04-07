@@ -23,11 +23,11 @@ from _2_CAM_S import CAMPPlus
 #PRETRAINED_WEIGHTS = "/home/zx/Valentin_workplace/最佳模型成人/5e-5+16+1e-3/Sopran/best_model.pth"
 
 
-DATASET_ROOT = "/home/zx/Valentin_workplace/DPO_data/Mezzo"
-MFCC_DIR = "/home/zx/Valentin_workplace/DPO_data/Mezzo/train/MFCC_Output/"
-LABEL_TEMPLATE_DIR = "/home/zx/Valentin_workplace/DPO_data/Mezzo/train/Chosen/"
-OUTPUT_LABEL_DIR = "/home/zx//Valentin_workplace/DPO_data/Mezzo/train/Rejected/"
-PRETRAINED_WEIGHTS = "/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo/2026-03-31_11-21-48/best_model.pth"
+DATASET_ROOT = "/home/zx/Valentin_workplace/DPO_data/Tenor"
+MFCC_DIR = "/home/zx/Valentin_workplace/DPO_data/Tenor/train/MFCC_Output/"
+LABEL_TEMPLATE_DIR = "/home/zx/Valentin_workplace/DPO_data/Tenor/train/Chosen/"
+OUTPUT_LABEL_DIR = "/home/zx//Valentin_workplace/DPO_data/Tenor/train/Rejected/"
+PRETRAINED_WEIGHTS = "/home/zx/codexProject/vocal_analysis/sft/best_models/Tenor/2026-04-06_16-31-27/best_model.pth"
 
 
 

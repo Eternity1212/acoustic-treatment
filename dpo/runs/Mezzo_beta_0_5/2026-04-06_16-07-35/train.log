@@ -1,0 +1,9 @@
+2026-04-06 16:07:35,624 | INFO | Run directory: dpo/runs/Mezzo_beta_0_5/2026-04-06_16-07-35
+2026-04-06 16:07:35,624 | INFO | Resolved config: {'data_dir': '/home/zx/Valentin_workplace/DPO_data/Mezzo/train', 'sft_checkpoint': '/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo/best_model.pth', 'reference_checkpoint': '/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo/best_model.pth', 'policy_model_dir': '/home/zx/codexProject/vocal_analysis/policy_model/Mezzo_beta_0_5/', 'output_dir': 'dpo/runs/Mezzo_beta_0_5', 'train_batch_size': 16, 'val_batch_size': 16, 'num_workers': 0, 'num_epochs': 50, 'learning_rate': 1e-05, 'weight_decay': 0.0001, 'beta': 0.5, 'seed': 1314, 'device': 'cpu', 'early_stopping_enabled': True, 'early_stopping_patience': 10, 'early_stopping_min_delta': 0.0001, 'split_ratio': 0.8, 'num_classes': 50, 'input_size': 1, 'embd_dim': 2560, 'growth_rate': 64, 'bn_size': 4, 'init_channels': 128, 'config_str': 'batchnorm-relu'}
+2026-04-06 16:07:35,624 | INFO | Policy model init checkpoint: /home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo/best_model.pth (fallback from sft_checkpoint)
+2026-04-06 16:07:35,624 | INFO | Found 153 aligned preference samples.
+2026-04-06 16:07:35,624 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-04-06 16:07:35,625 | INFO | Prepared 122 train samples.
+2026-04-06 16:07:35,625 | INFO | Found 153 aligned preference samples.
+2026-04-06 16:07:35,625 | INFO | Missing sample counts | MFCC: 0 | Chosen: 0 | Rejected: 0
+2026-04-06 16:07:35,625 | INFO | Prepared 31 val samples.

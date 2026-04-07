@@ -578,7 +578,7 @@ class CAMPPlus(nn.Module):
 if __name__ == '__main__':
     #data_dir = r"/home/zx/Valentin_workplace/Sopran+Mezzo"
     #data_dir ="/home/zx/Valentin_workplace/网站数据下载/3_28_Sopran/" 
-    data_dir ="/home/zx/Valentin_workplace/DPO_data/retrain_mezzo/"
+    data_dir ="/home/zx/Valentin_workplace/SFT_data/Tenor/"
     train_batch_size = 16
     val_batch_size = 16
     num_workers = 4
@@ -614,7 +614,7 @@ if __name__ == '__main__':
     current_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     #log_dir = os.path.join("/home/zx/AST1/best_models_for_grid_Sopran+Mezzo/1e-5+16+1e-4", current_time)
     #log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models", current_time)
-    log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models/Mezzo", current_time)
+    log_dir = os.path.join("/home/zx/codexProject/vocal_analysis/sft/best_models/Tenor/", current_time)
     os.makedirs(log_dir, exist_ok=True)
 
     train_model(model, train_loader, val_loader, num_epochs, optimizer, criterion, lr_scheduler, device, log_dir,

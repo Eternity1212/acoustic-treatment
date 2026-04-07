@@ -1,15 +1,15 @@
 """DPO 声乐打分训练的轻量级命令行入口。
 
-本模块负责读取 JSON 配置、应用命令行覆盖参数，并组装模型、数据和训练器。
+本模块负责读取 YAML 配置、应用命令行覆盖参数，并组装模型、数据和训练器。
 核心模型定义和训练逻辑不会继续堆在这个入口文件里。
 """
 
 import argparse
-import json
 import logging
 import os
 
 import torch
+import yaml
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 
@@ -45,7 +45,7 @@ def parse_args():
     """解析配置文件路径以及可选的命令行覆盖参数。"""
 
     parser = argparse.ArgumentParser(description="训练用于声乐偏好优化的 DPO 模型。")
-    parser.add_argument("--config", type=str, default="dpo/config_dpo.json", help="DPO JSON 配置文件路径。")
+    parser.add_argument("--config", type=str, default="dpo/config_dpo.yaml", help="DPO YAML 配置文件路径。")
     parser.add_argument("--data-dir", type=str, default=None, help="覆盖数据集目录。")
     parser.add_argument("--sft-checkpoint", type=str, default=None, help="覆盖 SFT checkpoint 路径。")
     parser.add_argument(
@@ -71,16 +71,17 @@ def parse_args():
 
 
 def load_config(config_path):
-    """读取 JSON 配置文件，并移除仅用于说明的注释字段。"""
+    """读取 YAML 配置文件。"""
 
     with open(config_path, "r", encoding="utf-8") as handle:
-        config = json.load(handle)
-
-    return {key: value for key, value in config.items() if not key.startswith("_comment")}
+        config = yaml.safe_load(handle)
+    if not isinstance(config, dict):
+        raise ValueError(f"Config file must contain a mapping at top level: {config_path}")
+    return config
 
 
 def apply_overrides(config, args):
-    """将非空命令行参数覆盖到 JSON 配置之上。"""
+    """将非空命令行参数覆盖到 YAML 配置之上。"""
 
     merged = dict(config)
     for key in OVERRIDE_KEYS:
@@ -108,6 +109,9 @@ def validate_config(config):
         "beta",
         "seed",
         "device",
+        "early_stopping_enabled",
+        "early_stopping_patience",
+        "early_stopping_min_delta",
         "split_ratio",
         "num_classes",
         "input_size",
@@ -123,6 +127,10 @@ def validate_config(config):
 
     if not config.get("reference_checkpoint"):
         config["reference_checkpoint"] = config["sft_checkpoint"]
+    if config["early_stopping_patience"] < 1:
+        raise ValueError("early_stopping_patience must be at least 1.")
+    if config["early_stopping_min_delta"] < 0:
+        raise ValueError("early_stopping_min_delta must be non-negative.")
     return config
 
 
@@ -194,6 +202,7 @@ def main():
     writer = SummaryWriter(log_dir=run_dir)
 
     best_val_preference_accuracy = float("-inf")
+    epochs_without_improvement = 0
     best_model_path = os.path.join(run_dir, "best_model.pth")
     last_model_path = os.path.join(run_dir, "last_model.pth")
 
@@ -238,13 +247,32 @@ def main():
         writer.add_scalar("Train/LearningRate", current_lr, epoch)
 
         save_state_dict(policy_model, last_model_path)
-        if val_metrics["preference_accuracy"] > best_val_preference_accuracy:
+        improved = val_metrics["preference_accuracy"] > (
+            best_val_preference_accuracy + config["early_stopping_min_delta"]
+        )
+        if improved:
             best_val_preference_accuracy = val_metrics["preference_accuracy"]
+            epochs_without_improvement = 0
             save_state_dict(policy_model, best_model_path)
             logging.info(
                 "Saved new best model with validation preference accuracy %.4f",
                 best_val_preference_accuracy,
             )
+        elif config["early_stopping_enabled"]:
+            epochs_without_improvement += 1
+            logging.info(
+                "No validation preference accuracy improvement for %d epoch(s). patience=%d, min_delta=%.6f",
+                epochs_without_improvement,
+                config["early_stopping_patience"],
+                config["early_stopping_min_delta"],
+            )
+            if epochs_without_improvement >= config["early_stopping_patience"]:
+                logging.info(
+                    "Early stopping triggered at epoch %d. Best validation preference accuracy: %.4f",
+                    epoch + 1,
+                    best_val_preference_accuracy,
+                )
+                break
 
     writer.close()
     persistent_policy_path = os.path.join(config["policy_model_dir"], "policy_model.pth")
